@@ -1,0 +1,108 @@
+### Variables
+@base = http://localhost:3001
+@idCerveza = PON_UN_ID_AQUI
+@idVino = 69a7338bc4b2b2c231fa5c36
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWRmYjI4NmU0MjJkY2I2NmRkMjIyMiIsImlhdCI6MTc3MjU2NTcwOCwiZXhwIjoxNzczMTcwNTA4fQ.l7sd_bYVS8E3ICFsRFvZ2M4Ejy-UxytwS7k-nUgakPw
+
+### =============== AUTH ===============
+
+### POST - Registro
+POST {{base}}/api/auth/registro
+Content-Type: application/json
+
+{
+  "email": "edgar2@test.com",
+  "password": "123456"
+}
+
+### POST - Login
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "edgar@test.com",
+  "password": "123456"
+}
+
+### PUT - Actualizar perfil (requiere token)
+PUT {{base}}/api/auth/perfil
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": "nuevo@test.com",
+  "password": "nuevaPassword"
+}
+
+### =============== CERVEZAS ===============
+
+### GET - Todas las cervezas
+GET {{base}}/api/cervezas
+
+### GET - Cerveza por ID
+GET {{base}}/api/cervezas/{{idCerveza}}
+
+### POST - Crear cerveza
+POST {{base}}/api/cervezas
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nom": "Estrella Damm",
+  "graduacio": 5.4,
+  "tipus": "Lager",
+  "descripcio": "Cervesa catalana"
+}
+
+### PUT - Actualizar cerveza
+PUT {{base}}/api/cervezas/{{idCerveza}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nom": "Estrella Damm Editada",
+  "graduacio": 6.0,
+  "tipus": "Lager",
+  "descripcio": "Actualitzada"
+}
+
+### DELETE - Eliminar cerveza
+DELETE {{base}}/api/cervezas/{{idCerveza}}
+Authorization: Bearer {{token}}
+
+
+### =============== VINOS ===============
+
+### GET - Todos los vinos
+GET {{base}}/api/vinos
+
+### GET - Vino por ID
+GET {{base}}/api/vinos/{{idVino}}
+
+### POST - Crear vino
+POST {{base}}/api/vinos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nom": "Rioja Reserva",
+  "graduacio": 13.5,
+  "tipus": "Tinto",
+  "descripcio": "Vi negre de La Rioja"
+}
+
+### PUT - Actualizar vino
+Authorization: Bearer {{token}}
+PUT {{base}}/api/vinos/{{idVino}}
+Content-Type: application/json
+
+{
+  "nom": "Rioja Reserva Editat",
+  "graduacio": 14.0,
+  "tipus": "Tinto",
+  "descripcio": "Actualitzat"
+}
+
+### DELETE - Eliminar vino
+DELETE {{base}}/api/vinos/{{idVino}}
+Authorization: Bearer {{token}}
