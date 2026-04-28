@@ -16,21 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
-const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(",")
-  : ["http://localhost:5173"];
-
-app.use(cors({
-  origin: (origin, callback) => {
-    // Permitir requests sin origin (Postman, Railway health checks...)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS bloqueado: ${origin}`));
-    }
-  },
-  credentials: true,
-}));
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send(`<h1>Bienvenido a la API de pruebas</h1>`);
