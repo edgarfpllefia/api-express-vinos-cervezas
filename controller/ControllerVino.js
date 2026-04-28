@@ -28,7 +28,7 @@ export async function postVinos(req, res) {
   console.log("Has hecho una petición a api/vinos con el metodo post");
   try {
     const imatge = req.file ? "uploads/" + req.file.filename : null;
-    const nuevo = await Vino.create(...req.body, imatge);
+    const nuevo = await Vino.create({ ...req.body, imatge });
     res.status(201).json(nuevo);
   } catch (error) {
     res.status(400).json({ error: error.message }); // 400 per errors de validació

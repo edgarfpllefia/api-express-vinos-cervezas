@@ -28,6 +28,11 @@ const cervezaSchema = new mongoose.Schema(
       required: [true, "La imagen es obligatoria"],
       trim: true,
     },
+    preu: {
+      type: Number,
+      required: [true, "El preu és obligatori"],
+      min: [0, "El preu ha de ser positiu"],
+    },
   },
   {
     timestamps: true, // afegeix automàticament createdAt i updatedAt

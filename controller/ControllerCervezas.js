@@ -27,7 +27,7 @@ export async function getIdCerveza(req, res) {
 export async function postCervezas(req, res) {
   try {
     const imatge = req.file ? "uploads/" + req.file.filename : null;
-    const nova = await Cerveza.create(...req.body, imatge);
+    const nova = await Cerveza.create({ ...req.body, imatge });
     res.status(201).json(nova);
   } catch (err) {
     res.status(400).json({ error: err.message }); // 400 per errors de validació

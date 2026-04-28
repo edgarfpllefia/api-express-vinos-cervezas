@@ -16,7 +16,7 @@ router.post("/registro", upload.single("foto"), async (req, res) => {
   try {
     // Extreure email i contrasenya del cos de la petició (req.body)
     const { name, email, password } = req.body;
-    const foto = req.file ? req.file.path : null;
+    const foto = req.file ? "uploads/" + req.file.filename : null;
     // Validar que s'han enviat tots dos camps; si no, 400 Bad Request
     if (!name || !email || !password || !foto) {
       return res
@@ -40,7 +40,7 @@ router.post("/registro", upload.single("foto"), async (req, res) => {
     // Retornar 201 Created amb el token i les dades públiques de l'usuari (sense password)
     res.status(201).json({
       token,
-      usuari: { id: usuari._id, email: usuari.email, rol: usuari.rol },
+      usuari: { id: usuari._id, name: usuari.name, email: usuari.email, rol: usuari.rol, foto: usuari.foto },
     });
   } catch (err) {
     // Qualsevol error (p. ex. validació de Mongoose) es respon amb 400
